@@ -23,8 +23,8 @@ def loginsite():
     print '>>> pls wait...'
     br.open('http://indyarocks.com/login')
     br.select_form(nr=0)
-    br.form['LoginForm[username]']='manimarang'
-    br.form['LoginForm[password]']='Shakira9'
+    br.form['LoginForm[username]']=your user name
+    br.form['LoginForm[password]']=your password
     br.submit()
     if 'profile' in br.geturl():
         print 'login successfully'
