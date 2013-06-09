@@ -12,7 +12,7 @@ def gettxt():
     print "enter your message : "
     txt=""
     while True:
-        line=raw_input()
+        line=str(raw_input())
         if "$" in line:
             break
         else:
@@ -20,6 +20,7 @@ def gettxt():
     return txt
 
 def loginsite():
+    print '>>> pls wait...'
     br.open('http://indyarocks.com/login')
     br.select_form(nr=0)
     br.form['LoginForm[username]']='manimarang'
@@ -33,7 +34,6 @@ def loginsite():
 def sendsms(mno,msg):
     print '>>> sending...'
     br.open('http://www.indyarocks.com/send-free-sms')
-    print br.geturl()
     br.select_form(nr=1)
     br.form['FreeSms[mobile]']=mno
     br.form['FreeSms[post_message]']=msg
@@ -54,32 +54,37 @@ def groupsms(book,txt):
 
 def logoutsite():
     br.open('http://www.indyarocks.com/logout')
-    print br.geturl()
     print 'logout successfully'
     sys.exit()
 
 
 def main():
-    if len(sys.argv[:])==2 and '.txt' in sys.argv[1]:
+    if len(sys.argv[:])==1:
+            print '''
+            ************************************
+            usage : 
+
+            ./indsms.py mobileno
+                   or
+            ./indsms.py file.txt
+
+             press '$' to terminate the input message
+            ************************************
+                     '''
+            sys.exit()
+    if '.txt' in sys.argv[1]:
         msg=gettxt()
         groupsms(sys.argv[1],msg)
         logoutsite()
-    if len(sys.argv[:])==2:
+    else:
         msg=gettxt()
         loginsite()
         sendsms(sys.argv[1],msg)
         logoutsite()
-    if '.txt' in sys.argv[1]:
-        groupsms(sys.argv[1],sys.argv[2])
-        logoutsite()
-    if len(sys.argv[:])==3 and '.txt' in sys.argv[1]:
-        groupsms(sys.argv[1],sys.argv[2])
-        logoutsite()
-    if len(sys.argv[:])==3:
-        loginsite()
-        sendsms(sys.argv[1],sys.argv[2])
-        logoutsite()
 
 if __name__=='__main__':
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print 'aborted by you'
 
