@@ -1,8 +1,5 @@
-author: manimaran g
-
-i'm on summer vacation. i planned to send txt to my old pals.
-that's why i written this script. indyarocks they provide 240 char
-sms in india.
+author: m4n1g
+date : 9/6/2013
 
 this is purely for fun. non commercial. just for educational purpose.
 
